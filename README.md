@@ -1,7 +1,7 @@
 ROR Lab.에서는 공식 레일스가이드의 `edge` 버전(http://edgeguides.rubyonrails.org) 을 한글화하는 프로젝트를 진행하고 있습니다. 
 이전까지는 개인적으로(rorlab@gmail.com) 한글화 작업(레일스가이드의 MVC 부분과 asset pipeline)을 해 왔으나 혼자서 docrails의 edge버전을 업데이트해서 한글화하기에는 역부족임을 느끼게 되어, 뜻을 같이하는 분들도 참여할 수 있는 기회를 드리기 위해 공동으로 한글번역 작업을 진행하기로 했습니다.  
 
-그래서 2013년 4월 30일, github.com의 기존 계정(rorlab)을 이용하여 `RORLabGuides`라는 그룹계정(github.com에서는 `Oragnization`이라고 말함)을 만든 후, 공식 docrails 저장소(lifo/docrails)를 fork하였습니다. 따라서 한글번역 작업의 소스를 관리할 저장소의 URL은 https://github.com/RORLabGuides/docrails 가 되겠습니다.
+그래서 2013년 4월 30일, github.com의 기존 계정(rorlab)을 이용하여 `RORLabGuides`라는 그룹계정(github.com에서는 `Organization`이라고 말함)을 만든 후, 공식 docrails 저장소(lifo/docrails)를 fork하였습니다. 따라서 한글번역 작업의 소스를 관리할 저장소의 URL은 https://github.com/RORLabGuides/docrails 가 되겠습니다.
 
 한글번역 작업을 하기 위해서는 자신의 로컬머신에 최소한 ruby와 git 이 설치되어 있어야 합니다. 
 그리고 http://github.com에 로그인한 후(계정이 없는 분은 회원가입 후 로그인, 무료), 페이지 상단에 있는 검색란에 `RORLabGuides/docrails`라고 입력하고 엔터키를 칩니다. 또는 웹브라우저에서 `https://github.com/RORLabGuides/docrails` 주소로 직접 이동하셔도 됩니다.
