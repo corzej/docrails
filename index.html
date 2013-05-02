@@ -38,12 +38,11 @@
 
 <h2>저장소 Fork 하기</h2>
 
-<p>이 페이지의 상단에 있는 <code>Fork</code> 버튼을 클릭하여 소스를 본인의 계정으로 복사(<code>fork</code>에 대한 적당한 한글번역이 없군요^^) 합니다. 
-이제 <code>github.com</code>에 본인 계정으로 로그인하면 본인의 <code>repositories</code>에 방금전에 <code>fork</code>한 <code>docrails 저장소</code>가 존재하게 됩니다. </p>
+<p>이 페이지의 상단에 있는 <code>Fork</code> 버튼을 클릭하면, 본인의 계정에 방금전에 <code>fork</code>한 <code>docrails 저장소</code>가 생성 됩니다. </p>
 
 <h2>본인의 저장소 clone하기</h2>
 
-<p>실제로 한글 번역 작업을 하기 위해서 우선 본인의 로컬머신에 <code>ruby</code>와 <code>git</code> 가 설치되어 있는지 확인하고, 아래와 같이 터미널 쉘에서 소스를 <code>git clone</code> 합니다. </p>
+<p>실제로 한글 번역 작업을 하기 위해서 우선 본인의 로컬머신에 <code>ruby</code>와 <code>git</code> 가 설치되어 있는지 확인하고, 아래와 같이 본인의 로컬머신 터미널 쉘에서 소스를 <code>git clone</code> 합니다. </p>
 
 <pre><code>$ git clone git@github.com:&lt;user_git_accout&gt;/docrails.git
 </code></pre>
@@ -80,6 +79,24 @@ $ git push
 Everything up-to-date
 </code></pre>
 
+<p>다른 방법으로는 .git/config 파일을 에디터로 열고 <code>upstream</code> 항목의 <code>url</code> 값을 아래와 같이 변경합니다. </p>
+
+<pre><code>[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+        ignorecase = true
+        precomposeunicode = false
+[branch "master"]
+[remote "origin"]
+        url = http://github.com/&lt;git_user_id&gt;/docrails.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "upstream"]
+        url = https://github.com/RORLabGuides/docrails.git
+        fetch = +refs/heads/*:refs/remotes/upstream/*
+</code></pre>
+
 <p>참고로 remote origin 브랜치의 주소를 https:// 프로토콜로 변경하는 이유는 본인의 github.com 계정정보에서 별도의 SSH Keys 등록 과정이 필요없기 때문입니다. 한편 이렇게 변경작업을 하지 않고 사용할 경우에는 본인의 ssh 공개키(~/.ssh/id_rsa)를 SSH Keys로 등록해 주어야 합니다. </p>
 
 <h2>작업소스파일의 위치</h2>
@@ -89,52 +106,56 @@ Everything up-to-date
 <pre><code>$ cd docrails/guides/source/ko
 </code></pre>
 
-<p>바로 여기에 있는 파일들이 번역을 할 소스입니다. 본인에게 할당된 파일을 에디터로 열고 한글로 번역을 하면 됩니다. </p>
+<p>바로 여기에 있는 파일들이 번역할 소스입니다. 본인에게 할당된 파일을 에디터로 열고 한글로 번역을 하면 됩니다. </p>
+
+<blockquote>
+<p>반드시 <em><em>source/ko/</em></em> 디렉토리에 있는 소스에 대해서 번역작업을 해야 합니다. </p>
+</blockquote>
 
 <h2>한글 번역시 주의사항</h2>
 
-<p><code>ko</code> 폴더에는 확장자가 <code>.md</code>, <code>.erb</code>, <code>.yaml</code>인 파일들이 존재하게 됩니다. 바로 이 폴더의 있는 파일들 중에 어떤 것을 작업할 것인지를 관리자와 상의해서 결정하게 되며, 다른 분들이 작업하는 파일과의 commit 충돌을 피하기 위해서, 다른 파일들에 대해서는 번역작업을 해서는 안됩니다. 즉, 한글번역 작업 파일로 할당받은 것에 대해서만 작업을 해야함을 잊어서는 안됩니다.</p>
+<p><code>ko</code> 폴더에는 확장자가 <code>.md</code>, <code>.erb</code>, <code>.yaml</code>인 파일들이 존재하게 됩니다. 바로 이 폴더의 있는 파일들에 대해서 번역작업을 하고, 작업한 내용을 저장합니다. </p>
 
 <h2>번역한 파일 커밋하기</h2>
 
-<p>번역을 완료하면 아래와 같이 <code>docrails/</code> 디렉토리로 이동합니다. </p>
+<p>번역한 내용을 저장한 후 아래와 같이 <code>docrails/</code> 디렉토리로 이동합니다. </p>
 
 <pre><code>$ cd docrails
 </code></pre>
 
-<p>그리고 아래와 같이 commit 작업을 합니다. </p>
+<p>그리고 아래와 같이 작업내용에 대해서 commit 작업을 합니다. </p>
 
 <pre><code>$ git add .
 $ git commit -m "translated &lt;file_name&gt;"
 $ git push (origin master)
 </code></pre>
 
-<p><code>&lt;file_name&gt;</code>에는 번역작업한 파일명을 입력하면 됩니다.
-이후에 github.com 사이트의 본인의 docrails 페이지로 이동하여 해당파일이 변경되었는지를 확인하면 제대로 작업이 된 것입니다. </p>
+<p>commit 메시지로, 번역 작업이 진행 중인 경우에는 <code>translating</code>을, 번역 작업이 완료된 경우에는 <code>translated</code>라는 단어를 사용하면 다른 사람들이 커밋 내용을 이해하는데 도움이 될 수 있을 것입니다. <code>&lt;file_name&gt;</code>에는 번역작업한 파일명을 입력하면 됩니다.
+이후에 github.com 사이트에서 자신의 docrails 저장소 페이지로 이동하여 해당파일의 변경된 내용을 볼 수 있으면 제대로 작업이 된 것입니다. </p>
 
-<h2>pull-request하기</h2>
+<h2>Pull Request 하기</h2>
 
-<p>이제 본인의 docrails 페이지 상단에 있는 <code>Pull Request</code> 버튼을 클릭하면 잠시 후에 번역작업한 내용이 RORLabGuides/docrails 로 merge 요청이 완료됩니다. </p>
+<p>다음으로, 본인의 docrails 페이지 상단에 있는 <code>Pull Request</code> 버튼을 클릭하면, 잠시 후에 번역작업한 내용이 RORLabGuides/docrails 로 merge 요청이 완료됩니다. </p>
 
-<p>그러면 RORLabGuides/docrails 관리자(<a href="mailto:rorlab@gmail.com">rorlab@gmail.com</a>)가 요청된 내용을 검토하고 이상없으면 <code>merge</code> 작업을 하게 됩니다. 이 때 본인에게 확인메일이 발송됩니다. </p>
+<p>RORLabGuides/docrails 관리자(<a href="mailto:rorlab@gmail.com">rorlab@gmail.com</a>)가 이렇게 요청된 내용을 검토하고 이상없으면 <code>merge</code> 작업을 하게 됩니다. 이 때 본인에게 확인메일이 발송되어 <code>merge</code> 상태를 알 수 있습니다. </p>
 
-<p>언제 <code>pull request</code> 내용이 <code>merge</code> 될 지는 순전히 관리자 마음에 달려 있죠^^. 확인메일을 확인한 후, RORLabGuides/docrails 페이지로 이동하여 최종결과를 확인하면 모든 절차가 일단락되는 것입니다. </p>
+<p>언제 <code>pull request</code> 내용이 <code>merge</code> 될 지는 순전히 관리자 마음에 달려 있죠^^. 메일을 확인한 후, RORLabGuides/docrails 페이지로 이동하여 최종결과를 확인하면 모든 절차가 일단락되는 것입니다. </p>
 
 <h2>자신의 로컬 저장소 docrails 업데이트하기</h2>
 
 <p>레일스가이드 한글번역을 할 때 <code>RORLabGuides/docrails</code> 을 <code>fork</code> 해서 자신의 <code>git</code> 계정에 있는 <code>docrails</code>에 대해서 작업을 하게 됩니다.
-그리고 번역작업이 완료되면 <code>Pull Request</code> 를 <code>RORLabGuides/docrails</code> 로 하게 됩니다. 이 때 관리자(<a href="mailto:rorlab@gmail.com">rorlab@gmail.com</a>)는 요청된 내용을 검토한 후 <code>RORLabGuides/docrails</code> 에 머지하게 됩니다. 관린자는 최종적으로 머지된 소스를 가지고 ROR Lab. 웹사이트로 <code>publish</code>하게 되어 <a href="http://rorlab.org/rg/index.html">http://rorlab.org/rg/index.html</a> 로 연결하면 확인할 수 있게 됩니다. </p>
+그리고 번역작업이 완료되면 자신이 작업한 내용에 대해서 <code>RORLabGuides/docrails</code> 로 <code>Pull Request</code>를 하게 되며, 이 때 관리자(<a href="mailto:rorlab@gmail.com">rorlab@gmail.com</a>)는 요청된 내용을 검토한 후 <code>RORLabGuides/docrails</code> 로 merge하게 됩니다. 관리자는 최종적으로 merge된 소스를 가지고 ROR Lab. 웹사이트로 <code>publish</code>하게 되어 <a href="http://rorlab.org/rg/index.html">http://rorlab.org/rg/index.html</a> 로 연결하면 확인할 수 있게 됩니다. </p>
 
-<p>한글번역 공동작업에 참여하는 다른 분들이 작업한 소스도 <code>Pull Request</code> 되어 <code>RORLabGuides</code>에 머지되기 때문에 머지된 최종 버전을 자신의 <code>docrails</code> 저장소에 반영하기 위해서는 <code>git pull</code> 명령을 사용해 합니다. </p>
+<p>한글번역 작업에 참여하는 다른 분들이 작업한 소스도 <code>Pull Request</code> 되어 <code>RORLabGuides</code>에 merge 되기 때문에, <code>RORLabGuides/docrails</code> 저장소의 최종 commit 상태를 자신의 <code>docrails</code> 저장소에 반영하기 위해서는 <code>git pull</code> 명령을 사용해 합니다. </p>
 
 <h2>Upstream 원격저장소 지정하기</h2>
 
-<p>이를 위해서는 먼저 자신의 로컬머신 docrails 폴더에서 아래와 같이 <code>upstream</code>이라는 이름의 remote 저장소를 지정 합니다. </p>
+<p>이를 위해서는 먼저 자신의 로컬머신 docrails 폴더에서 아래와 같이 <code>upstream</code>이라는 이름의 remote 저장소를 생성합니다. </p>
 
 <pre><code>$ git remote add upstream https://github.com/RORLabGuides/docrails.git
 </code></pre>
 
-<p>실행결과, 원격 저장소들과 각각의 브랜치는 다음과 같습니다. </p>
+<p>실행결과, <code>원격</code> 저장소들과 각각의 브랜치는 다음과 같습니다. </p>
 
 <pre><code>$ git branch -r
   origin/gh-pages
@@ -143,16 +164,21 @@ $ git push (origin master)
   upstream/master
 </code></pre>
 
-<h2>Upstream 가져와서 머지하기</h2>
+<h2>Upstream 가져와서 Merge 하기</h2>
 
-<p>이제 upstream 원격 브랜치를 로컬 master 브랜치로 pull(fetch+merge) 하면 됩니다.</p>
+<p>이제 upstream 원격 저장소의 master 브랜치를 로컬 master 브랜치로 pull(fetch+merge) 하면 됩니다.</p>
 
 <pre><code>$ git checkout master  // 로컬 저장소의 현재브랜치를 master로 변경
-$ git pull upstream master  // 원격 저장소 upstream의 master 브랜치를 git pull 함.
+$ git pull upstream master  // 원격 저장소 upstream의 master 브랜치를 현재 로컬 저장소(master 브랜치)로 git pull 함.
 From https://github.com/RORLabGuides/docrails
  * branch            master     -&gt; FETCH_HEAD
 Already up-to-date.
 </code></pre>
+
+<p>자 이제 <code>upstream</code> 원격 저장소의 master 브랜치내의 소스가 자신의 로컬머신에 있는 docrails 저장소에 반영이 된 것입니다. 
+이후에는 설명드린 바와 같이 일반적인 번역작업을 한 후에 <code>Pull Request</code>하는 식으로 진행하면 됩니다. </p>
+
+<p>감사합니다. </p>
 
 <p>수고하셨습니다. </p>
 
