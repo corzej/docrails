@@ -120,6 +120,40 @@ $ git push (origin master)
 
 <p>언제 <code>pull request</code> 내용이 <code>merge</code> 될 지는 순전히 관리자 마음에 달려 있죠^^. 확인메일을 확인한 후, RORLabGuides/docrails 페이지로 이동하여 최종결과를 확인하면 모든 절차가 일단락되는 것입니다. </p>
 
+<h2>자신의 로컬 저장소 docrails 업데이트하기</h2>
+
+<p>레일스가이드 한글번역을 할 때 <code>RORLabGuides/docrails</code> 을 <code>fork</code> 해서 자신의 <code>git</code> 계정에 있는 <code>docrails</code>에 대해서 작업을 하게 됩니다.
+그리고 번역작업이 완료되면 <code>Pull Request</code> 를 <code>RORLabGuides/docrails</code> 로 하게 됩니다. 이 때 관리자(<a href="mailto:rorlab@gmail.com">rorlab@gmail.com</a>)는 요청된 내용을 검토한 후 <code>RORLabGuides/docrails</code> 에 머지하게 됩니다. 관린자는 최종적으로 머지된 소스를 가지고 ROR Lab. 웹사이트로 <code>publish</code>하게 되어 <a href="http://rorlab.org/rg/index.html">http://rorlab.org/rg/index.html</a> 로 연결하면 확인할 수 있게 됩니다. </p>
+
+<p>한글번역 공동작업에 참여하는 다른 분들이 작업한 소스도 <code>Pull Request</code> 되어 <code>RORLabGuides</code>에 머지되기 때문에 머지된 최종 버전을 자신의 <code>docrails</code> 저장소에 반영하기 위해서는 <code>git pull</code> 명령을 사용해 합니다. </p>
+
+<h2>Upstream 원격저장소 지정하기</h2>
+
+<p>이를 위해서는 먼저 자신의 로컬머신 docrails 폴더에서 아래와 같이 <code>upstream</code>이라는 이름의 remote 저장소를 지정 합니다. </p>
+
+<pre><code>$ git remote add upstream https://github.com/RORLabGuides/docrails.git
+</code></pre>
+
+<p>실행결과, 원격 저장소들과 각각의 브랜치는 다음과 같습니다. </p>
+
+<pre><code>$ git branch -r
+  origin/gh-pages
+  origin/master
+  upstream/gh-pages
+  upstream/master
+</code></pre>
+
+<h2>Upstream 가져와서 머지하기</h2>
+
+<p>이제 upstream 원격 브랜치를 로컬 master 브랜치로 pull(fetch+merge) 하면 됩니다.</p>
+
+<pre><code>$ git checkout master  // 로컬 저장소의 현재브랜치를 master로 변경
+$ git pull upstream master  // 원격 저장소 upstream의 master 브랜치를 git pull 함.
+From https://github.com/RORLabGuides/docrails
+ * branch            master     -&gt; FETCH_HEAD
+Already up-to-date.
+</code></pre>
+
 <p>수고하셨습니다. </p>
 
 <p>관리자(<a href="mailto:rorlab@gmail.com">rorlab@gmail.com</a>)</p>
